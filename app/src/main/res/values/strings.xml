@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Abda UI</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="watch_movie">Watch your favorite movies or series on only
+    one platform. You can watch it anytime and anywhere.</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="please_sign_in_to_your_account">Please sign in to your account</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="email">Email Address</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="please_fill_in_the_form_to_continue">Please fill in the form to continue</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="sign_in">Sign In</string>
+    <string name="account">Account</string>
+    <string name="favorites">Favorites</string>
+    <string name="series">Series</string>
+    <string name="search">Search</string>
+    <string name="home">Home</string>
+    <string name="movie_banner">Movie Banner</string>
+
+    <string name="movie_about">
+        Long ago, in the fantasy world of Kumandra, humans and dragons lived together in harmony. But when an evil force threatened the land, the dragons sacrificed themselves to save humanity. Now, 500 years later, that same evil has returned and it’s up to a lone warrior, Raya, to track down the legendary last dragon to restore the fractured land and its divided people.
+    </string>
+
+    <string name="web_client_id">167038503179-2v6i9vrade80riekpve74nbprpefrcsp.apps.googleusercontent.com</string>
+    <string name="profile">Profile</string>
+</resources>
