@@ -124,6 +124,28 @@
             app:layout_constraintStart_toEndOf="@+id/text_favorites"
             app:layout_constraintTop_toTopOf="@+id/text_favorites" />
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/sign_out_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="#77302F2F"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:padding="@dimen/dimen_16"
+                android:text="Sign Out"
+                android:textAlignment="center"
+                android:textColor="#FF0000"
+                android:textSize="@dimen/dimen_16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

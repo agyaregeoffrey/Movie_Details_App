@@ -40,6 +40,8 @@ class MovieActivity : AppCompatActivity(), NavigationHost {
             .commit {
                 setCustomAnimations(
                     R.anim.slide_in_right,
+                    R.anim.fade_out,
+                    R.anim.fade_in,
                     R.anim.slide_out_left
                 )
                 replace(R.id.nav_host, fragment)
