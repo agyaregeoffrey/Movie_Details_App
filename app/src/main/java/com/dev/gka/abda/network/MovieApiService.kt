@@ -1,6 +1,7 @@
 package com.dev.gka.abda.network
 
 import com.dev.gka.abda.model.Movie
+import com.dev.gka.abda.model.TV
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -32,6 +33,7 @@ private val retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .build()
 
+
 interface MovieApiService {
     @GET("movie/{popular}")
     suspend fun getPopularMovies(
@@ -51,9 +53,34 @@ interface MovieApiService {
         @Path("time_window") timeWindow: String,
         @Query("api_key") apiKey: String
     ): Movie
+
+    // Series endpoints
+    @GET("tv/{airing_today}")
+    suspend fun airingTodaySeries(
+        @Path("airing_today") airingToday: String,
+        @Query("api_key") apiKey: String
+    ): TV
+
+    @GET("tv/{latest}")
+    suspend fun getLatestSeries(
+        @Path("latest") latest: String,
+        @Query("api_key") apiKey: String
+    ): TV
+
+    @GET("tv/{popular}")
+    suspend fun getPopularSeries(
+        @Path("popular") popular: String,
+        @Query("api_key") apiKey: String
+    ): TV
+
+    @GET("tv/{top_rated}")
+    suspend fun getTopRatedSeries(
+        @Path("top_rated") topRated: String,
+        @Query("api_key") apiKey: String
+    ): TV
 }
 
-object MovieApi {
+object MyApi {
     val retrofitService: MovieApiService by lazy {
         retrofit.create(MovieApiService::class.java)
     }

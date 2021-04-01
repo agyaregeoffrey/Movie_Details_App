@@ -5,7 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.dev.gka.abda.ApiStatus
+import com.dev.gka.abda.MovieAdapter
 import com.dev.gka.abda.R
+import com.dev.gka.abda.adapters.TvAdapter
+import com.dev.gka.abda.adapters.TvViewHolder
+import com.dev.gka.abda.databinding.FragmentSeriesBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,16 +25,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class SeriesFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    private lateinit var binding: FragmentSeriesBinding
+
+    private val viewModel: SeriesViewModel by lazy {
+        ViewModelProvider(this).get(SeriesViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -35,7 +37,72 @@ class SeriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_series, container, false)
+        binding = FragmentSeriesBinding.inflate(inflater, container, false)
+        binding.lifecycleOwner = this
+        initializeDisplayContent()
+        return binding.root
+    }
+
+    private fun initializeDisplayContent() {
+        viewModel.status.observe(viewLifecycleOwner,  {
+            when (it) {
+                ApiStatus.LOADING -> {
+                    binding.groupSeriesWidgets.visibility = View.GONE
+                    binding.groupSeriesStatus.visibility = View.VISIBLE
+                    binding.loadingAnimation.playAnimation()
+                }
+
+                ApiStatus.DONE -> {
+                    binding.groupSeriesWidgets.visibility = View.VISIBLE
+                    binding.groupSeriesStatus.visibility = View.GONE
+                    binding.loadingAnimation.cancelAnimation()
+                }
+
+                ApiStatus.ERROR -> {
+                    binding.groupSeriesWidgets.visibility = View.GONE
+                    binding.groupSeriesStatus.visibility = View.GONE
+                    binding.errorAnimation.visibility = View.VISIBLE
+                    binding.errorAnimation.playAnimation()
+                    binding.loadingAnimation.cancelAnimation()
+                }
+            }
+        })
+
+        viewModel.airingToday.observe(viewLifecycleOwner, { data ->
+            binding.recyclerAiringTodaySeries.apply {
+                adapter = TvAdapter(TvAdapter.OnClickListener {
+                    viewModel.displayMovieDetails(it)
+                }, data)
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL, false
+                )
+            }
+        })
+
+        viewModel.topRated.observe(viewLifecycleOwner, { data ->
+            binding.recyclerRatedSeries.apply {
+                adapter = TvAdapter(TvAdapter.OnClickListener {
+                    viewModel.displayMovieDetails(it)
+                }, data)
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL, false
+                )
+            }
+        })
+
+        viewModel.popular.observe(viewLifecycleOwner, { data ->
+            binding.recyclerPopularSeries.apply {
+                adapter = TvAdapter(TvAdapter.OnClickListener {
+                    viewModel.displayMovieDetails(it)
+                }, data)
+                layoutManager = LinearLayoutManager(
+                    context,
+                    LinearLayoutManager.HORIZONTAL, false
+                )
+            }
+        })
     }
 
     companion object {

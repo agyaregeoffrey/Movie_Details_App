@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dev.gka.abda.ApiStatus
 import com.dev.gka.abda.MovieAdapter
 import com.dev.gka.abda.NavigationHost
 import com.dev.gka.abda.R
@@ -42,21 +43,23 @@ class HomeFragment : Fragment() {
 
         viewModel.status.observe(viewLifecycleOwner, Observer {
             when (it) {
-                MovieApiStatus.LOADING -> {
+                ApiStatus.LOADING -> {
                     binding.groupWidgets.visibility = View.GONE
                     binding.groupStatus.visibility = View.VISIBLE
                     binding.loadingAnimation.playAnimation()
                 }
 
-                MovieApiStatus.DONE -> {
+                ApiStatus.DONE -> {
                     binding.groupWidgets.visibility = View.VISIBLE
                     binding.groupStatus.visibility = View.GONE
                     binding.loadingAnimation.cancelAnimation()
                 }
 
-                MovieApiStatus.ERROR -> {
+                ApiStatus.ERROR -> {
                     binding.groupWidgets.visibility = View.GONE
                     binding.groupStatus.visibility = View.GONE
+                    binding.errorAnimation.visibility = View.VISIBLE
+                    binding.errorAnimation.playAnimation()
                     binding.loadingAnimation.cancelAnimation()
                 }
             }

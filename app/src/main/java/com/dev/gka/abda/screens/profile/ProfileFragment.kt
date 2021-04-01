@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.dev.gka.abda.databinding.FragmentProfileBinding
 import com.dev.gka.abda.offline.PrefManager
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import java.util.*
 
@@ -21,8 +22,21 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false)
+
+        binding.signOutLayout.setOnClickListener {
+            signOut()
+        }
         initializeProfileDetails()
         return binding.root
+    }
+
+    private fun signOut() {
+        Snackbar.make(
+            requireView(), "Layout Clicked",
+            Snackbar.LENGTH_LONG
+        )
+            .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
+            .show()
     }
 
     private fun initializeProfileDetails() {

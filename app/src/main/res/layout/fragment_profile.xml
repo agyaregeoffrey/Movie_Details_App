@@ -1,151 +1,160 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        tools:context=".screens.profile.ProfileFragment">
+        android:background="@color/black">
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/materialCardView2"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_16"
-            android:layout_marginTop="@dimen/dimen_8"
-            android:backgroundTint="#77302F2F"
-            app:cardCornerRadius="@dimen/dimen_16"
-            app:cardElevation="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            tools:context=".screens.profile.ProfileFragment">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_16"
+                android:layout_marginTop="@dimen/dimen_8"
+                android:backgroundTint="#77302F2F"
+                app:cardCornerRadius="@dimen/dimen_16"
+                app:cardElevation="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="120dp"
+                    android:layout_height="120dp">
+
+                    <ImageView
+                        android:id="@+id/image_profile"
+                        android:layout_width="@dimen/dimen_70"
+                        android:layout_height="@dimen/dimen_70"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_name_initials"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dimen_8"
+                        android:layout_marginTop="@dimen/dimen_8"
+                        android:layout_marginEnd="@dimen/dimen_8"
+                        android:layout_marginBottom="@dimen/dimen_8"
+                        android:fontFamily="@font/poppins"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="50dp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="AG" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/text_display_name"
+                style="@style/MovieTitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16"
+                app:layout_constraintStart_toStartOf="@+id/materialCardView2"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
+                tools:text="Agyare Geoffrey" />
+
+            <TextView
+                android:id="@+id/text_email"
+                style="@style/MovieGenreTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@+id/text_display_name"
+                app:layout_constraintTop_toBottomOf="@+id/text_display_name"
+                tools:text="agyaregeoffrey@gmail.com" />
+
+            <TextView
+                android:id="@+id/text_watched"
+                style="@style/MovieTitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16"
+                android:text="20"
+                app:layout_constraintStart_toStartOf="@+id/text_email"
+                app:layout_constraintTop_toBottomOf="@+id/text_email" />
+
+            <TextView
+                android:id="@+id/textView12"
+                style="@style/MovieGenreTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8"
+                android:text="watched"
+                app:layout_constraintBottom_toBottomOf="@+id/text_watched"
+                app:layout_constraintStart_toEndOf="@+id/text_watched"
+                app:layout_constraintTop_toTopOf="@+id/text_watched" />
+
+            <TextView
+                android:id="@+id/text_favorites"
+                style="@style/MovieTitleTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_64"
+                android:text="13"
+                app:layout_constraintBottom_toBottomOf="@+id/textView12"
+                app:layout_constraintStart_toEndOf="@+id/textView12"
+                app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+            <TextView
+                style="@style/MovieGenreTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dimen_8"
+                android:text="favorites"
+                app:layout_constraintBottom_toBottomOf="@+id/text_favorites"
+                app:layout_constraintStart_toEndOf="@+id/text_favorites"
+                app:layout_constraintTop_toTopOf="@+id/text_favorites" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="120dp"
-                android:layout_height="120dp">
+                android:id="@+id/sign_out_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="350dp"
+                android:background="#77302F2F"
+                android:focusable="true"
+                android:clickable="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_favorites">
 
-                <ImageView
-                    android:id="@+id/image_profile"
-                    android:layout_width="@dimen/dimen_70"
-                    android:layout_height="@dimen/dimen_70"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/img"
-                    android:visibility="gone"
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins"
+                    android:padding="@dimen/dimen_16"
+                    android:text="Sign Out"
+                    android:textAlignment="center"
+                    android:textColor="#FF0000"
+                    android:textSize="@dimen/dimen_16"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/text_name_initials"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dimen_8"
-                    android:layout_marginTop="@dimen/dimen_8"
-                    android:layout_marginEnd="@dimen/dimen_8"
-                    android:layout_marginBottom="@dimen/dimen_8"
-                    android:fontFamily="@font/poppins"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="50dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="AG" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <TextView
-            android:id="@+id/text_display_name"
-            style="@style/MovieTitleTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16"
-            app:layout_constraintStart_toStartOf="@+id/materialCardView2"
-            app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
-            tools:text="Agyare Geoffrey" />
-
-        <TextView
-            android:id="@+id/text_email"
-            style="@style/MovieGenreTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="@+id/text_display_name"
-            app:layout_constraintTop_toBottomOf="@+id/text_display_name"
-            tools:text="agyaregeoffrey@gmail.com" />
-
-        <TextView
-            android:id="@+id/text_watched"
-            style="@style/MovieTitleTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dimen_16"
-            android:text="20"
-            app:layout_constraintStart_toStartOf="@+id/text_email"
-            app:layout_constraintTop_toBottomOf="@+id/text_email" />
-
-        <TextView
-            android:id="@+id/textView12"
-            style="@style/MovieGenreTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_8"
-            android:text="watched"
-            app:layout_constraintBottom_toBottomOf="@+id/text_watched"
-            app:layout_constraintStart_toEndOf="@+id/text_watched"
-            app:layout_constraintTop_toTopOf="@+id/text_watched" />
-
-        <TextView
-            android:id="@+id/text_favorites"
-            style="@style/MovieTitleTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_64"
-            android:text="13"
-            app:layout_constraintBottom_toBottomOf="@+id/textView12"
-            app:layout_constraintStart_toEndOf="@+id/textView12"
-            app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-        <TextView
-            style="@style/MovieGenreTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dimen_8"
-            android:text="favorites"
-            app:layout_constraintBottom_toBottomOf="@+id/text_favorites"
-            app:layout_constraintStart_toEndOf="@+id/text_favorites"
-            app:layout_constraintTop_toTopOf="@+id/text_favorites" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/sign_out_layout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="#77302F2F"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/poppins"
-                android:padding="@dimen/dimen_16"
-                android:text="Sign Out"
-                android:textAlignment="center"
-                android:textColor="#FF0000"
-                android:textSize="@dimen/dimen_16"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

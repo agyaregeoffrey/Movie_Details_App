@@ -4,19 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dev.gka.abda.ApiStatus
 import com.dev.gka.abda.Constants
 import com.dev.gka.abda.model.Result
 import com.dev.gka.abda.model.Movie
-import com.dev.gka.abda.network.MovieApi
+import com.dev.gka.abda.network.MyApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-enum class MovieApiStatus { LOADING, DONE, ERROR }
+
 
 class HomeViewModel : ViewModel() {
     // Status of Api
-    private val _status = MutableLiveData<MovieApiStatus>()
-    val status: LiveData<MovieApiStatus>
+    private val _status = MutableLiveData<ApiStatus>()
+    val status: LiveData<ApiStatus>
         get() = _status
 
     // Popular Movies
@@ -48,20 +49,20 @@ class HomeViewModel : ViewModel() {
     private fun retrievePopularMovies() {
         var popularMovies: MutableList<Movie>
         viewModelScope.launch {
-            _status.value = MovieApiStatus.LOADING
+            _status.value = ApiStatus.LOADING
             try {
                 popularMovies =
                     mutableListOf(
-                        MovieApi.retrofitService.getPopularMovies(
+                        MyApi.retrofitService.getPopularMovies(
                             Constants.POPULAR_PATH,
                             Constants.API_KEY
                         )
                     )
                 _popular.value = popularMovies[0].results
                 Timber.d("Poster Path ${popularMovies[0].results[0].poster_path}")
-                _status.value = MovieApiStatus.DONE
+                _status.value = ApiStatus.DONE
             } catch (e: Exception) {
-                _status.value = MovieApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
                 Timber.w("Failure: ${e.message}")
             }
         }
@@ -70,19 +71,19 @@ class HomeViewModel : ViewModel() {
     private fun retrieveTopRatedMovies() {
         var topMovies: MutableList<Movie>
         viewModelScope.launch {
-            _status.value = MovieApiStatus.LOADING
+            _status.value = ApiStatus.LOADING
             try {
                 topMovies =
                     mutableListOf(
-                        MovieApi.retrofitService.getTopRatedMovies(
+                        MyApi.retrofitService.getTopRatedMovies(
                             Constants.TOP_RATED_PATH,
                             Constants.API_KEY
                         )
                     )
                 _top.value = topMovies[0].results
-                _status.value = MovieApiStatus.DONE
+                _status.value = ApiStatus.DONE
             } catch (e: Exception) {
-                _status.value = MovieApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
                 _top.value = ArrayList()
             }
         }
@@ -91,20 +92,20 @@ class HomeViewModel : ViewModel() {
     private fun retrieveTrendingMovies() {
         var trendingMovies: MutableList<Movie>
         viewModelScope.launch {
-            _status.value = MovieApiStatus.LOADING
+            _status.value = ApiStatus.LOADING
             try {
                 trendingMovies =
                     mutableListOf(
-                        MovieApi.retrofitService.getTrendingMovies(
+                        MyApi.retrofitService.getTrendingMovies(
                             Constants.MEDIA_TYPE_MOVIE,
                             Constants.TIME_WINDOW_WEEK, Constants.API_KEY
                         )
                     )
                 _trending.value = trendingMovies[0].results
-                _status.value = MovieApiStatus.DONE
+                _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 Timber.w("Failure: ${e.message}")
-                _status.value = MovieApiStatus.ERROR
+                _status.value = ApiStatus.ERROR
                 _top.value = ArrayList()
             }
         }

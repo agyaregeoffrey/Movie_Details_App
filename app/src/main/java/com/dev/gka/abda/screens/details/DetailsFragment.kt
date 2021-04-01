@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dev.gka.abda.DateUtil
 import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.FragmentDetailsBinding
 
@@ -45,7 +46,7 @@ class DetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDetailsBinding.inflate(inflater, container, false)
         binding.textDetailTitle.text = movieTitle
-        binding.textReleaseDate.text = releaseDate
+        binding.textReleaseDate.text = DateUtil.formatDateString(releaseDate)
         binding.textRating.text = rating.toString()
         glideModule(backdropPath, binding.imageBackdrop)
         glideModule(posterPath, binding.imagePoster)

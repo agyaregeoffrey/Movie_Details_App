@@ -1,4 +1,4 @@
-package com.dev.gka.abda
+package com.dev.gka.abda.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.dev.gka.abda.DateUtil
+import com.dev.gka.abda.R
 import com.dev.gka.abda.model.Result
+import com.dev.gka.abda.model.TvResult
 
 
 class MovieViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,7 +31,7 @@ class MovieViewHolder private constructor (itemView: View) : RecyclerView.ViewHo
             .centerCrop()
             .into(movieCover)
         title.text = movie.title
-        releaseDate.text = movie.release_date
+        releaseDate.text = DateUtil.formatDateString(movie.release_date)
     }
 
     companion object {
@@ -40,6 +43,40 @@ class MovieViewHolder private constructor (itemView: View) : RecyclerView.ViewHo
             )
 
             return MovieViewHolder(view)
+        }
+    }
+}
+
+
+class TvViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val tvCover: ImageView = itemView.findViewById(R.id.movie_cover)
+    private val title: TextView = itemView.findViewById(R.id.movie_title)
+    private val airDate: TextView = itemView.findViewById(R.id.release_date)
+
+    // http://image.tmdb.org/t/p/w500
+
+    fun bind(tv: TvResult) {
+        Glide.with(itemView)
+            .load("http://image.tmdb.org/t/p/w500${tv.poster_path}")
+            .apply(
+                RequestOptions()
+                    .placeholder(R.drawable.ic_loading_banner)
+            )
+            .centerCrop()
+            .into(tvCover)
+        title.text = tv.name
+        airDate.text = DateUtil.formatDateString(tv.first_air_date)
+    }
+
+    companion object {
+        fun from(parent: ViewGroup): TvViewHolder {
+            val layoutInflater = LayoutInflater.from(parent.context)
+            val view = layoutInflater.inflate(
+                R.layout.item_movie_cover,
+                parent, false
+            )
+
+            return TvViewHolder(view)
         }
     }
 }

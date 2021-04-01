@@ -2,6 +2,7 @@ package com.dev.gka.abda
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.dev.gka.abda.adapters.MovieViewHolder
 import com.dev.gka.abda.model.Result
 
 class MovieAdapter(
