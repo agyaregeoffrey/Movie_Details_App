@@ -11,6 +11,8 @@ import com.dev.gka.abda.NavigationHost
 import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.ActivityMovieBinding
 import com.dev.gka.abda.model.Result
+import com.dev.gka.abda.screens.profile.ProfileFragment
+import com.dev.gka.abda.screens.series.SeriesFragment
 
 class MovieActivity : AppCompatActivity(), NavigationHost {
 
@@ -22,25 +24,19 @@ class MovieActivity : AppCompatActivity(), NavigationHost {
 
         val navController = findNavController(R.id.nav_host)
         binding.bottomNavigationView.setupWithNavController(navController)
+
+
     }
 
-    override fun navigateTo(fragment: Fragment, result: Result, addToBackstack: Boolean) {
-        val bundle = Bundle()
-        bundle.putString("title", result.title)
-        bundle.putString("release", result.release_date)
-        bundle.putInt("vote", result.vote_count)
-        bundle.putString("overview", result.overview)
-        bundle.putString("language", result.original_language)
-        bundle.putString("backdrop", result.backdrop_path)
-        bundle.putString("poster", result.poster_path)
 
+    override fun navigateTo(fragment: Fragment, bundle: Bundle, addToBackstack: Boolean) {
         fragment.arguments = bundle
 
         supportFragmentManager
             .commit {
                 setCustomAnimations(
                     R.anim.slide_in_right,
-                    R.anim.fade_out,
+                    R.anim.slide_out_left,
                     R.anim.fade_in,
                     R.anim.slide_out_left
                 )

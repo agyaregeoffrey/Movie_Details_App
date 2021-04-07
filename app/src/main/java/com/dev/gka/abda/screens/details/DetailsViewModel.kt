@@ -15,7 +15,4 @@ class DetailsViewModel(result: Result) : ViewModel() {
         _selectedMovie.value = result
     }
 
-    val displayMovieTitle: LiveData<String> = Transformations.map(selectedMovie) {
-        it.title
-    }
 }

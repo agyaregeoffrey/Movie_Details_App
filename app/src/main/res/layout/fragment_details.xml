@@ -145,7 +145,7 @@
 
           <TextView
               android:id="@+id/text_overview"
-              style="@style/MovieTitleTextStyle"
+              style="@style/MovieGenreTextStyle"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:layout_marginTop="@dimen/dimen_8"

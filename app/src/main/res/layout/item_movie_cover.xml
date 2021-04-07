@@ -19,6 +19,7 @@
             app:cardBackgroundColor="@color/material_on_surface_stroke"
             app:cardCornerRadius="@dimen/dimen_16"
             app:cardElevation="0dp"
+            app:rippleColor="@color/gray"
             app:layout_constraintBottom_toTopOf="@+id/linear_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

@@ -14,7 +14,7 @@
             android:id="@+id/action_welcomeFragment_to_loginFragment2"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/fade_out"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>
@@ -27,7 +27,7 @@
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/fade_out"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>
@@ -40,7 +40,7 @@
             android:id="@+id/action_splashFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/fade_out"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out_left"
             app:popUpTo="@id/splashFragment"
@@ -55,7 +55,7 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/fade_out"
+            app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out_left" />
     </fragment>

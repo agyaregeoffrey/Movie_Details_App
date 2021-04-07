@@ -28,7 +28,6 @@ import timber.log.Timber
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewModel: LoginViewModel
 
     private val auth: FirebaseAuth by lazy {
         FirebaseAuth.getInstance()

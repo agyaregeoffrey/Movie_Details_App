@@ -5,12 +5,12 @@ import java.util.*
 
 class DateUtil {
     companion object {
-        fun formatDateString(date: String): String {
-            var formattedDate = date
-            val dateFormat = SimpleDateFormat("d, MMM, yyyy", Locale.US)
-            formattedDate = dateFormat.format(Date()).toString()
+        fun formatDateString(str: String): String {
+            val validatedDateString = SimpleDateFormat("d-MMM-yyyy", Locale.US)
+            val date = validatedDateString.parse(str)
 
-            return formattedDate
+            val expectedDateFormat = SimpleDateFormat("d MMM, yyyy", Locale.US)
+            return expectedDateFormat.format(date!!)
         }
     }
 }

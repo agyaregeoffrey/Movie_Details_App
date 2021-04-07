@@ -39,6 +39,7 @@
     <style name="ButtonStyle.WithGoogle" parent="ButtonStyle">
         <item name="backgroundTint">@color/white</item>
         <item name="android:textColor">@color/black</item>
+        <item name="rippleColor">@color/gray</item>
         <item name="iconTint">@null</item>
     </style>
 

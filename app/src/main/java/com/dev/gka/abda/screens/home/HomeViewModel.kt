@@ -35,6 +35,10 @@ class HomeViewModel : ViewModel() {
     val trending: LiveData<List<Result>>
         get() = _trending
 
+    // Banner Images
+    private val _movieOnBanner = MutableLiveData<Result>()
+    val movieOnBanner: LiveData<Result> get() = _movieOnBanner
+
     // Navigation
     private val _navigateToSelectedMovie = MutableLiveData<Result>()
     val navigateToSelectedMovie: LiveData<Result>
@@ -58,8 +62,11 @@ class HomeViewModel : ViewModel() {
                             Constants.API_KEY
                         )
                     )
-                _popular.value = popularMovies[0].results
-                Timber.d("Poster Path ${popularMovies[0].results[0].poster_path}")
+                for (movie in popularMovies){
+                    _popular.value = movie.results
+                }
+
+                _movieOnBanner.value = popularMovies[0].results.random()
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
@@ -80,7 +87,9 @@ class HomeViewModel : ViewModel() {
                             Constants.API_KEY
                         )
                     )
-                _top.value = topMovies[0].results
+                for (movie in topMovies) {
+                    _top.value = movie.results
+                }
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR

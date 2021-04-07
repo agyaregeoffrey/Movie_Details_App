@@ -1,5 +1,6 @@
 package com.dev.gka.abda
 
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.dev.gka.abda.model.Result
 
@@ -13,5 +14,5 @@ interface NavigationHost {
      * Trigger a navigation to the specified fragment, optionally adding a transaction to the back
      * stack to make this navigation reversible.
      */
-    fun navigateTo(fragment: Fragment, result: Result, addToBackstack: Boolean)
+    fun navigateTo(fragment: Fragment, bundle: Bundle, addToBackstack: Boolean)
 }

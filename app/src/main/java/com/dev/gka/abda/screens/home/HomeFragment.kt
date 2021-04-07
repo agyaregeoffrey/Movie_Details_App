@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +18,6 @@ import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.FragmentHomeBinding
 import com.dev.gka.abda.model.Result
 import com.dev.gka.abda.screens.details.DetailsFragment
-import timber.log.Timber
 
 
 /**
@@ -41,30 +41,13 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
 
-        viewModel.status.observe(viewLifecycleOwner, Observer {
-            when (it) {
-                ApiStatus.LOADING -> {
-                    binding.groupWidgets.visibility = View.GONE
-                    binding.groupStatus.visibility = View.VISIBLE
-                    binding.loadingAnimation.playAnimation()
-                }
+        statusOfApi()
+        initHomeFragmentDisplayContent()
 
-                ApiStatus.DONE -> {
-                    binding.groupWidgets.visibility = View.VISIBLE
-                    binding.groupStatus.visibility = View.GONE
-                    binding.loadingAnimation.cancelAnimation()
-                }
+        return binding.root
+    }
 
-                ApiStatus.ERROR -> {
-                    binding.groupWidgets.visibility = View.GONE
-                    binding.groupStatus.visibility = View.GONE
-                    binding.errorAnimation.visibility = View.VISIBLE
-                    binding.errorAnimation.playAnimation()
-                    binding.loadingAnimation.cancelAnimation()
-                }
-            }
-        })
-
+    private fun initHomeFragmentDisplayContent() {
         viewModel.trending.observe(viewLifecycleOwner, Observer { data ->
             binding.recyclerTrending.apply {
                 adapter = MovieAdapter(MovieAdapter.OnClickListener { result ->
@@ -75,9 +58,6 @@ class HomeFragment : Fragment() {
                     LinearLayoutManager.HORIZONTAL, false
                 )
             }
-            Timber.i("Trending List: ${data.size}")
-            val bannerImage = data.random()
-            movieBanner(bannerImage)
         })
 
         viewModel.popular.observe(viewLifecycleOwner, Observer { data ->
@@ -106,20 +86,75 @@ class HomeFragment : Fragment() {
 
         viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, { result ->
             if (null != result) {
-                (activity as NavigationHost).navigateTo(DetailsFragment(), result, true)
+                val bundle = bundleOf(
+                    "title" to result.original_title,
+                    "release" to result.release_date,
+                    "overview" to result.overview,
+                    "vote" to result.vote_count,
+                    "language" to result.original_language,
+                    "backdrop" to result.backdrop_path,
+                    "poster" to result.poster_path
+
+                )
+                (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
                 viewModel.displayMovieDetailsComplete()
             }
         })
 
-        return binding.root
+        viewModel.movieOnBanner.observe(viewLifecycleOwner, { result ->
+            movieOnBanner(result)
+            binding.imageSinglePopular.setOnClickListener { navigateToSelectedMovieOnBanner(result) }
+        })
     }
 
-    private fun movieBanner(result: Result) {
+    private fun statusOfApi() {
+        viewModel.status.observe(viewLifecycleOwner, {
+            when (it) {
+                ApiStatus.LOADING -> {
+                    binding.groupWidgets.visibility = View.GONE
+                    binding.groupStatus.visibility = View.VISIBLE
+                    binding.loadingAnimation.playAnimation()
+                }
+
+                ApiStatus.DONE -> {
+                    binding.groupWidgets.visibility = View.VISIBLE
+                    binding.groupStatus.visibility = View.GONE
+                    binding.loadingAnimation.cancelAnimation()
+                }
+
+                ApiStatus.ERROR -> {
+                    binding.groupWidgets.visibility = View.GONE
+                    binding.groupStatus.visibility = View.GONE
+                    binding.errorAnimation.visibility = View.VISIBLE
+                    binding.errorAnimation.playAnimation()
+                    binding.loadingAnimation.cancelAnimation()
+                }
+            }
+        })
+    }
+
+    private fun navigateToSelectedMovieOnBanner(result: Result) {
+        val bundle = bundleOf(
+            "title" to result.original_title,
+            "release" to result.release_date,
+            "overview" to result.overview,
+            "vote" to result.vote_count,
+            "language" to result.original_language,
+            "backdrop" to result.backdrop_path,
+            "poster" to result.poster_path
+
+        )
+        (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
+        viewModel.displayMovieDetailsComplete()
+
+    }
+
+    private fun movieOnBanner(result: Result) {
         Glide.with(this)
             .load("http://image.tmdb.org/t/p/w500${result.poster_path}")
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_loading)
+                    .placeholder(R.drawable.ic_loading_banner)
             )
             .centerCrop()
             .into(binding.imageSinglePopular)

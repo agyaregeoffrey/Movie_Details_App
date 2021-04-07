@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dev.gka.abda.ApiStatus
 import com.dev.gka.abda.MovieAdapter
+import com.dev.gka.abda.NavigationHost
 import com.dev.gka.abda.R
 import com.dev.gka.abda.adapters.TvAdapter
 import com.dev.gka.abda.adapters.TvViewHolder
 import com.dev.gka.abda.databinding.FragmentSeriesBinding
+import com.dev.gka.abda.screens.details.DetailsFragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -101,6 +104,23 @@ class SeriesFragment : Fragment() {
                     context,
                     LinearLayoutManager.HORIZONTAL, false
                 )
+            }
+        })
+
+        viewModel.navigateToSelectedSeries.observe(viewLifecycleOwner, { result ->
+            if (null != result) {
+                val bundle = bundleOf(
+                    "title" to result.name,
+                    "release" to result.first_air_date,
+                    "overview" to result.overview,
+                    "vote" to result.vote_count,
+                    "language" to result.original_language,
+                    "backdrop" to result.backdrop_path,
+                    "poster" to result.poster_path
+
+                )
+                (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
+                viewModel.displayMovieDetailsComplete()
             }
         })
     }
