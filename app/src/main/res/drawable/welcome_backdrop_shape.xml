@@ -6,6 +6,6 @@
         android:topLeftRadius="20dp" />
 
     <solid android:width="11dp"
-        android:color="@color/white"
+        android:color="@color/backdrop_color"
         />
 </shape>

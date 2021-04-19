@@ -39,6 +39,7 @@ class DetailsFragment : Fragment() {
         posterPath = arguments?.getString("backdrop")!!
         backdropPath = arguments?.getString("poster")!!
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,11 +54,11 @@ class DetailsFragment : Fragment() {
 
 
         if (language == "en") {
-            binding.textLanguage.text = "English"
-            binding.textSubtitle.text = "English"
+            binding.textLanguage.text = getString(R.string.english)
+            binding.textSubtitle.text = getString(R.string.english)
         } else {
-            binding.textLanguage.text = "Not Available"
-            binding.textSubtitle.text = "Not Available"
+            binding.textLanguage.text = getString(R.string.not_available)
+            binding.textSubtitle.text = getString(R.string.not_available)
         }
 
         return binding.root

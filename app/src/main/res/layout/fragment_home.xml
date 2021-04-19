@@ -9,9 +9,9 @@
 
     <ScrollView
         android:id="@+id/scroll_view"
+        style="@style/splashBackgroundStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/black"
         tools:context=".screens.home.HomeFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,27 +42,27 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:contentDescription="@string/movie_banner"
-                        tools:src="@drawable/img"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/img" />
 
                     <TextView
                         android:id="@+id/text_single_popular"
-                        android:fontFamily="@font/poppins"
-                        android:textSize="@dimen/dimen_16"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        tools:text="Movie Title"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/dimen_16"
+                        android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.95" />
+                        app:layout_constraintVertical_bias="0.95"
+                        tools:text="Movie Title" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:paddingTop="@dimen/dimen_8"
-                android:text="Trending Movies"
+                android:text="@string/trending_movies"
                 app:layout_constraintStart_toStartOf="@+id/materialCardView"
                 app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:paddingBottom="@dimen/dimen_8"
-                android:text="Popular"
+                android:text="@string/popular"
                 app:layout_constraintStart_toStartOf="@+id/materialCardView"
                 app:layout_constraintTop_toBottomOf="@id/recycler_trending" />
 
@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:paddingBottom="@dimen/dimen_8"
-                android:text="Top Rated"
+                android:text="@string/top_rated"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_popular" />
 
@@ -169,13 +169,13 @@
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:visibility="gone"
-                app:lottie_loop="true"
-                app:lottie_autoPlay="false"
-                app:lottie_rawRes="@raw/network_error"
                 app:layout_constraintBottom_toBottomOf="@id/guideline4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/guideline3" />
+                app:layout_constraintTop_toTopOf="@id/guideline3"
+                app:lottie_autoPlay="false"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/network_error" />
 
 
             <TextView
@@ -184,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_8"
-                android:text="Loading..."
+                android:text="@string/loading"
                 app:layout_constraintEnd_toEndOf="@+id/loading_animation"
                 app:layout_constraintStart_toStartOf="@+id/loading_animation"
                 app:layout_constraintTop_toBottomOf="@+id/loading_animation" />
@@ -214,7 +214,41 @@
                 android:id="@+id/group_widgets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="materialCardView,text_trending,recycler_trending,textView8,recycler_popular,textView9,recycler_top_rated" />
+                app:constraint_referenced_ids="materialCardView,text_trending,recycler_trending,textView8,
+                recycler_popular,textView9,recycler_top_rated, imageView, imageView4, imageView5" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="235dp"
+                app:layout_constraintBottom_toBottomOf="@+id/text_trending"
+                app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+                app:layout_constraintStart_toEndOf="@+id/text_trending"
+                app:layout_constraintTop_toTopOf="@+id/text_trending"
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="301dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                app:layout_constraintEnd_toEndOf="@+id/imageView"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                app:layout_constraintTop_toTopOf="@+id/textView8"
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="282dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView9"
+                app:layout_constraintEnd_toEndOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                app:layout_constraintTop_toTopOf="@+id/textView9"
+                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

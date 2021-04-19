@@ -57,8 +57,8 @@
 
                   <ImageView
                       android:id="@+id/image_poster"
-                      android:layout_width="150dp"
-                      android:layout_height="200dp"
+                      android:layout_width="@dimen/dimen_150"
+                      android:layout_height="@dimen/dimen_200"
                       android:scaleType="centerCrop"
                       app:layout_constraintBottom_toBottomOf="parent"
                       app:layout_constraintEnd_toEndOf="parent"
