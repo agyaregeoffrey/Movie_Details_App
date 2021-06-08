@@ -10,39 +10,37 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dev.gka.abda.DateUtil
 import com.dev.gka.abda.R
-import com.dev.gka.abda.model.Result
 import com.dev.gka.abda.model.TvResult
 
-
-class MovieViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
-    private val movieCover: ImageView = itemView.findViewById(R.id.movie_cover)
+class TvViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
+    private val tvCover: ImageView = itemView.findViewById(R.id.movie_cover)
     private val title: TextView = itemView.findViewById(R.id.movie_title)
-    private val releaseDate: TextView = itemView.findViewById(R.id.release_date)
+    private val airDate: TextView = itemView.findViewById(R.id.release_date)
 
     // http://image.tmdb.org/t/p/w500
 
-    fun bind(movie: Result) {
+    fun bind(tv: TvResult) {
         Glide.with(itemView)
-            .load("http://image.tmdb.org/t/p/w500${movie.poster_path}")
+            .load("http://image.tmdb.org/t/p/w500${tv.poster_path}")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.ic_loading_banner)
             )
             .centerCrop()
-            .into(movieCover)
-        title.text = movie.title
-        releaseDate.text = DateUtil.formatDateString(movie.release_date)
+            .into(tvCover)
+        title.text = tv.name
+        airDate.text = DateUtil.formatDateString(tv.first_air_date)
     }
 
     companion object {
-        fun from(parent: ViewGroup): MovieViewHolder {
+        fun from(parent: ViewGroup): TvViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val view = layoutInflater.inflate(
                 R.layout.item_movie_cover,
                 parent, false
             )
 
-            return MovieViewHolder(view)
+            return TvViewHolder(view)
         }
     }
 }
