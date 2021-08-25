@@ -22,7 +22,6 @@ class MovieActivity : AppCompatActivity(), NavigationHost {
         val navController = findNavController(R.id.nav_host)
         binding.bottomNavigationView.setupWithNavController(navController)
 
-
     }
 
 

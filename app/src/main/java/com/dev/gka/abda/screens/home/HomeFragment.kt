@@ -15,7 +15,7 @@ import com.dev.gka.abda.adapters.MovieAdapter
 import com.dev.gka.abda.utilities.NavigationHost
 import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.FragmentHomeBinding
-import com.dev.gka.abda.model.MovieResult
+import com.dev.gka.abda.model.Result
 import com.dev.gka.abda.screens.details.DetailsFragment
 import com.dev.gka.abda.utilities.ApiStatus
 
@@ -83,7 +83,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        viewModel.navigateToSelectedMovie.observe(viewLifecycleOwner, { result ->
+        viewModel.navigateToSelected.observe(viewLifecycleOwner, { result ->
             if (null != result) {
                 val bundle = bundleOf(
                     "title" to result.original_title,
@@ -95,12 +95,12 @@ class HomeFragment : Fragment() {
                     "poster" to result.poster_path
 
                 )
-                (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
+                (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, true)
                 viewModel.navigateToSelectedMovieDetailsComplete()
             }
         })
 
-        viewModel.movieOnBanner.observe(viewLifecycleOwner, { result ->
+        viewModel.onBanner.observe(viewLifecycleOwner, { result ->
             movieOnBanner(result)
             binding.imageSinglePopular.setOnClickListener { navigateToSelectedMovieOnBanner(result) }
         })
@@ -132,15 +132,15 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun navigateToSelectedMovieOnBanner(movieResult: MovieResult) {
+    private fun navigateToSelectedMovieOnBanner(result: Result) {
         val bundle = bundleOf(
-            "title" to movieResult.original_title,
-            "release" to movieResult.release_date,
-            "overview" to movieResult.overview,
-            "vote" to movieResult.vote_count,
-            "language" to movieResult.original_language,
-            "backdrop" to movieResult.backdrop_path,
-            "poster" to movieResult.poster_path
+            "title" to result.original_title,
+            "release" to result.release_date,
+            "overview" to result.overview,
+            "vote" to result.vote_count,
+            "language" to result.original_language,
+            "backdrop" to result.backdrop_path,
+            "poster" to result.poster_path
 
         )
         (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
@@ -148,15 +148,15 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun movieOnBanner(movieResult: MovieResult) {
+    private fun movieOnBanner(result: Result) {
         Glide.with(this)
-            .load("http://image.tmdb.org/t/p/w500${movieResult.poster_path}")
+            .load("http://image.tmdb.org/t/p/w500${result.poster_path}")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.ic_loading_banner)
             )
             .centerCrop()
             .into(binding.imageSinglePopular)
-        binding.textSinglePopular.text = movieResult.title
+        binding.textSinglePopular.text = result.title
     }
 }

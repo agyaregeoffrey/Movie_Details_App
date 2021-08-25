@@ -2,18 +2,18 @@ package com.dev.gka.abda.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.dev.gka.abda.model.MovieResult
+import com.dev.gka.abda.model.Result
 
 class MovieAdapter(
     private val onClickListener: OnClickListener,
-    private val movieResults: List<MovieResult>
+    private val results: List<Result>
 ) : RecyclerView.Adapter<MovieViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         return MovieViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        val result = movieResults[position]
+        val result = results[position]
         holder.bind(result)
         holder.itemView.setOnClickListener {
             onClickListener.onClick(result)
@@ -21,9 +21,9 @@ class MovieAdapter(
     }
 
 
-    override fun getItemCount() = movieResults.size
+    override fun getItemCount() = results.size
 
-    class OnClickListener(val clickListener: (movieResultProperty: MovieResult) -> Unit) {
-        fun onClick(movieResultProperty: MovieResult) = clickListener(movieResultProperty)
+    class OnClickListener(val clickListener: (resultProperty: Result) -> Unit) {
+        fun onClick(resultProperty: Result) = clickListener(resultProperty)
     }
 }

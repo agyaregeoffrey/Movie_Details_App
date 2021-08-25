@@ -3,15 +3,15 @@ package com.dev.gka.abda.screens.details
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.dev.gka.abda.model.MovieResult
+import com.dev.gka.abda.model.Result
 
-class DetailsViewModel(movieResult: MovieResult) : ViewModel() {
-    private val _selectedMovie = MutableLiveData<MovieResult>()
-    val selectedMovie: LiveData<MovieResult>
+class DetailsViewModel(result: Result) : ViewModel() {
+    private val _selectedMovie = MutableLiveData<Result>()
+    val selected: LiveData<Result>
         get() = _selectedMovie
 
     init {
-        _selectedMovie.value = movieResult
+        _selectedMovie.value = result
     }
 
 }

@@ -19,7 +19,11 @@
         android:id="@+id/series_fragment"
         android:name="com.dev.gka.abda.screens.series.SeriesFragment"
         android:label="@string/series"
-        tools:layout="@layout/fragment_series"/>
+        tools:layout="@layout/fragment_series">
+        <action
+            android:id="@+id/action_series_fragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.dev.gka.abda.screens.signup.SignUpFragment"
@@ -34,4 +38,13 @@
         android:name="com.dev.gka.abda.screens.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login"/>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.dev.gka.abda.screens.details.DetailsFragment"
+        android:label="DetailsFragment"
+        tools:layout="@layout/fragment_details">
+        <action
+            android:id="@+id/action_detailsFragment_to_series_fragment"
+            app:destination="@id/series_fragment" />
+    </fragment>
 </navigation>

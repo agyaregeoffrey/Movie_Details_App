@@ -22,9 +22,9 @@
                 style="@style/MovieTitleTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dimen_16"
+                android:layout_marginStart="@dimen/dimen_16"
                 android:layout_marginTop="@dimen/dimen_16"
-                android:text="Airing Today"
+                android:text="@string/airing_today"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:paddingBottom="@dimen/dimen_8"
-                android:text="Popular TV Series"
+                android:text="@string/popular_tv_series"
                 app:layout_constraintStart_toStartOf="@+id/text_airing_today"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_airing_today_series" />
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dimen_16"
                 android:paddingBottom="@dimen/dimen_8"
-                android:text="Top Rated TV Series"
+                android:text="@string/top_rated_tv_series"
                 app:layout_constraintStart_toStartOf="@+id/textView8"
                 app:layout_constraintTop_toBottomOf="@+id/recycler_popular_series" />
 

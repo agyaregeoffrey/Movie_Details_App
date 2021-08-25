@@ -140,6 +140,7 @@
         <item name="strokeColor">@color/hint_color</item>
         <item name="android:stateListAnimator" tools:ignore="NewApi">@null</item>
         <item name="android:padding">@dimen/dimen_20</item>
+        <item name="rippleColor">@color/hint_color</item>
     </style>
 
 </resources>

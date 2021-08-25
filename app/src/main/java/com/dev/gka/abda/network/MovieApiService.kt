@@ -35,7 +35,7 @@ private val retrofit = Retrofit.Builder()
 
 
 interface MovieApiService {
-    
+
     @GET("movie/{popular}")
     suspend fun getPopularMovies(
         @Path("popular") popular: String,
@@ -46,39 +46,45 @@ interface MovieApiService {
     @GET("movie/{top_rated}")
     suspend fun getTopRatedMovies(
         @Path("top_rated") topRated: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): Movie
 
     @GET("trending/{media_type}/{time_window}")
     suspend fun getTrendingMovies(
         @Path("media_type") mediaType: String,
         @Path("time_window") timeWindow: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): Movie
 
     // TV endpoints
     @GET("tv/{airing_today}")
     suspend fun airingTodaySeries(
         @Path("airing_today") airingToday: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): TV
 
     @GET("tv/{latest}")
     suspend fun getLatestSeries(
         @Path("latest") latest: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): TV
 
     @GET("tv/{popular}")
     suspend fun getPopularSeries(
         @Path("popular") popular: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): TV
 
     @GET("tv/{top_rated}")
     suspend fun getTopRatedSeries(
         @Path("top_rated") topRated: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): TV
 }
 

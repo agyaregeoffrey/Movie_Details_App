@@ -47,4 +47,7 @@
     <string name="field_cannot_be_empty">Field cannot be empty</string>
     <string name="invalid_email">Invalid email entered</string>
     <string name="password_limit_less">Password cannot be less than 8 characters</string>
+    <string name="airing_today">Airing Today</string>
+    <string name="top_rated_tv_series">Top Rated TV Series</string>
+    <string name="popular_tv_series">Popular TV Series</string>
 </resources>

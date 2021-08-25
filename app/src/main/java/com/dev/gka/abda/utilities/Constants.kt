@@ -10,7 +10,7 @@ object Constants {
     // TV Paths
     const val AIRING_TODAY = "airing_today"
 
-    const val API_KEY = "c95054e473cdf9edeb1314ab7af98477"
+    const val API_KEY = "Replace with your api key"
     const val MEDIA_TYPE_MOVIE = "movie"
     const val MEDIA_TYPE_TV = "tv"
 
@@ -18,7 +18,7 @@ object Constants {
     const val TIME_WINDOW_WEEK = "week"
 
     // Maximum = 1000; Minimum = 1; Default = 1 -> Number of pages to query
-    const val PAGE = 50
+    const val PAGES = 100
 
     // Google sign in code
     const val RC_SIGN_IN = 123

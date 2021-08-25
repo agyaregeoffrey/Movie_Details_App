@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.dev.gka.abda.utilities.DateUtil
 import com.dev.gka.abda.R
-import com.dev.gka.abda.model.MovieResult
+import com.dev.gka.abda.model.Result
 
 const val BASE_MOVIE_POSTER_URL ="http://image.tmdb.org/t/p/w500"
 
@@ -20,7 +20,7 @@ class MovieViewHolder private constructor (itemView: View) : RecyclerView.ViewHo
     private val releaseDate: TextView = itemView.findViewById(R.id.release_date)
 
 
-    fun bind(movie: MovieResult) {
+    fun bind(movie: Result) {
         Glide.with(itemView)
             .load(BASE_MOVIE_POSTER_URL + movie.poster_path)
             .apply(

@@ -46,11 +46,14 @@ class SeriesViewModel : ViewModel() {
                 airing = mutableListOf(
                     MyApi.retrofitService.airingTodaySeries(
                         Constants.AIRING_TODAY,
-                        Constants.API_KEY
+                        Constants.API_KEY,
+                        10
                     )
                 )
+                for (air in airing) {
+                    _airingToday.value = air.results
+                }
                 _status.value = ApiStatus.DONE
-                _airingToday.value = airing[0].results
                 Timber.d("Airing Size: ${airing.size}")
             } catch (e: Exception) {
                 _airingToday.value = ArrayList()
@@ -66,11 +69,15 @@ class SeriesViewModel : ViewModel() {
             try {
                 popularSeries = mutableListOf(
                     MyApi.retrofitService.getPopularSeries(
-                        Constants.POPULAR_PATH, Constants.API_KEY
+                        Constants.POPULAR_PATH,
+                        Constants.API_KEY,
+                        Constants.PAGES
                     )
                 )
+                for (popular in popularSeries) {
+                    _popular.value = popular.results
+                }
                 _status.value = ApiStatus.DONE
-                _popular.value = popularSeries[0].results
             } catch (e: Exception) {
                 _popular.value = ArrayList()
                 _status.value = ApiStatus.ERROR
@@ -85,11 +92,15 @@ class SeriesViewModel : ViewModel() {
             try {
                 topRated = mutableListOf(
                     MyApi.retrofitService.getTopRatedSeries(
-                        Constants.TOP_RATED_PATH, Constants.API_KEY
+                        Constants.TOP_RATED_PATH,
+                        Constants.API_KEY,
+                        Constants.PAGES
                     )
                 )
+                for (top in topRated) {
+                    _topRated.value = top.results
+                }
                 _status.value = ApiStatus.DONE
-                _topRated.value = topRated[0].results
                 Timber.d("Top Rated Size: ${topRated.size}")
             } catch (e: Exception) {
                 _topRated.value = ArrayList()
