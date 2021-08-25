@@ -10,7 +10,7 @@ object Constants {
     // TV Paths
     const val AIRING_TODAY = "airing_today"
 
-    const val API_KEY = "c95054e473cdf9edeb1314ab7af98477"
+    const val API_KEY = "replace with your api key"
     const val MEDIA_TYPE_MOVIE = "movie"
     const val MEDIA_TYPE_TV = "tv"
 
