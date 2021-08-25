@@ -8,23 +8,24 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.dev.gka.abda.DateUtil
+import com.dev.gka.abda.utilities.DateUtil
 import com.dev.gka.abda.R
 import com.dev.gka.abda.model.TvResult
+
+const val BASE_TV_POSTER_URL ="http://image.tmdb.org/t/p/w500"
 
 class TvViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvCover: ImageView = itemView.findViewById(R.id.movie_cover)
     private val title: TextView = itemView.findViewById(R.id.movie_title)
     private val airDate: TextView = itemView.findViewById(R.id.release_date)
 
-    // http://image.tmdb.org/t/p/w500
-
     fun bind(tv: TvResult) {
+        val imagePath = tv.backdrop_path ?: tv.poster_path
         Glide.with(itemView)
-            .load("http://image.tmdb.org/t/p/w500${tv.poster_path}")
+            .load(BASE_TV_POSTER_URL + imagePath)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_loading_banner)
+                    .placeholder(R.drawable.ic_loading)
             )
             .centerCrop()
             .into(tvCover)

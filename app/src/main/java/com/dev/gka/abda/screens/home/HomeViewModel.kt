@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev.gka.abda.ApiStatus
-import com.dev.gka.abda.Constants
-import com.dev.gka.abda.model.Result
+import com.dev.gka.abda.utilities.ApiStatus
+import com.dev.gka.abda.utilities.Constants
+import com.dev.gka.abda.model.MovieResult
 import com.dev.gka.abda.model.Movie
 import com.dev.gka.abda.network.MyApi
 import kotlinx.coroutines.launch
@@ -21,27 +21,27 @@ class HomeViewModel : ViewModel() {
         get() = _status
 
     // Popular Movies
-    private val _popular = MutableLiveData<List<Result>>()
-    val popular: LiveData<List<Result>>
+    private val _popular = MutableLiveData<List<MovieResult>>()
+    val popular: LiveData<List<MovieResult>>
         get() = _popular
 
     // Top Rated Movies
-    private val _top = MutableLiveData<List<Result>>()
-    val top: LiveData<List<Result>>
+    private val _top = MutableLiveData<List<MovieResult>>()
+    val top: LiveData<List<MovieResult>>
         get() = _top
 
     // Trending Movies
-    private val _trending = MutableLiveData<List<Result>>()
-    val trending: LiveData<List<Result>>
+    private val _trending = MutableLiveData<List<MovieResult>>()
+    val trending: LiveData<List<MovieResult>>
         get() = _trending
 
-    // Banner Images
-    private val _movieOnBanner = MutableLiveData<Result>()
-    val movieOnBanner: LiveData<Result> get() = _movieOnBanner
+    // Banner image
+    private val _movieOnBanner = MutableLiveData<MovieResult>()
+    val movieOnBanner: LiveData<MovieResult> get() = _movieOnBanner
 
     // Navigation
-    private val _navigateToSelectedMovie = MutableLiveData<Result>()
-    val navigateToSelectedMovie: LiveData<Result>
+    private val _navigateToSelectedMovie = MutableLiveData<MovieResult>()
+    val navigateToSelectedMovie: LiveData<MovieResult>
         get() = _navigateToSelectedMovie
 
     init {
@@ -59,14 +59,15 @@ class HomeViewModel : ViewModel() {
                     mutableListOf(
                         MyApi.retrofitService.getPopularMovies(
                             Constants.POPULAR_PATH,
-                            Constants.API_KEY
+                            Constants.API_KEY,
+                            Constants.PAGE
                         )
                     )
                 for (movie in popularMovies){
-                    _popular.value = movie.results
+                    _popular.value = movie.movieResults
                 }
 
-                _movieOnBanner.value = popularMovies[0].results.random()
+                _movieOnBanner.value = popularMovies[0].movieResults.random()
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
@@ -88,7 +89,7 @@ class HomeViewModel : ViewModel() {
                         )
                     )
                 for (movie in topMovies) {
-                    _top.value = movie.results
+                    _top.value = movie.movieResults
                 }
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
@@ -110,7 +111,7 @@ class HomeViewModel : ViewModel() {
                             Constants.TIME_WINDOW_WEEK, Constants.API_KEY
                         )
                     )
-                _trending.value = trendingMovies[0].results
+                _trending.value = trendingMovies[0].movieResults
                 _status.value = ApiStatus.DONE
             } catch (e: Exception) {
                 Timber.w("Failure: ${e.message}")
@@ -120,11 +121,11 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun displayMovieDetails(movieProperty: Result) {
+    fun navigateToSelectedMovieDetails(movieProperty: MovieResult) {
         _navigateToSelectedMovie.value = movieProperty
     }
 
-    fun displayMovieDetailsComplete() {
+    fun navigateToSelectedMovieDetailsComplete() {
         _navigateToSelectedMovie.value = null
     }
 }

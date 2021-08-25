@@ -1,4 +1,4 @@
-package com.dev.gka.abda
+package com.dev.gka.abda.utilities
 
 object Constants {
     // Movie Paths
@@ -10,13 +10,17 @@ object Constants {
     // TV Paths
     const val AIRING_TODAY = "airing_today"
 
-    const val API_KEY = "YOUR API KEY HERE"
+    const val API_KEY = "c95054e473cdf9edeb1314ab7af98477"
     const val MEDIA_TYPE_MOVIE = "movie"
     const val MEDIA_TYPE_TV = "tv"
 
     const val TIME_WINDOW_DAY = "day"
     const val TIME_WINDOW_WEEK = "week"
 
+    // Maximum = 1000; Minimum = 1; Default = 1 -> Number of pages to query
+    const val PAGE = 50
 
+    // Google sign in code
+    const val RC_SIGN_IN = 123
 
 }

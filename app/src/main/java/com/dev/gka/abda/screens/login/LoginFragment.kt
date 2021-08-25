@@ -16,10 +16,15 @@ import com.dev.gka.abda.activities.MovieActivity
 import com.dev.gka.abda.databinding.FragmentLoginBinding
 import com.dev.gka.abda.model.User
 import com.dev.gka.abda.offline.PrefManager
+import com.dev.gka.abda.utilities.Constants.RC_SIGN_IN
+import com.dev.gka.abda.utilities.Helpers.cancelAnimation
+import com.dev.gka.abda.utilities.Helpers.playAnimation
+import com.dev.gka.abda.utilities.Helpers.showSnack
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import timber.log.Timber
@@ -34,6 +39,9 @@ class LoginFragment : Fragment() {
     }
 
     private lateinit var googleSignInClient: GoogleSignInClient
+
+    private lateinit var email: String
+    private lateinit var password: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,37 +61,19 @@ class LoginFragment : Fragment() {
 
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), googleSignInOptions)
 
-
-
-        binding.buttonNavigateToSignUp.setOnClickListener {
-            it?.findNavController()?.navigate(R.id.action_loginFragment_to_signUpFragment)
-        }
-
         binding.buttonSignIn.setOnClickListener {
-            var isValid = true
-
-            if (!isEmailValid(binding.editTextEmail.text)) {
-                isValid = false
-                binding.textInputEmail.error = "Email field cannot be empty"
-            } else {
-                binding.textInputEmail.error = null
-            }
-
-            if (!isPasswordValid(binding.editTextPassword.text)) {
-                isValid = false
-                binding.textInputPassword.error = "Password field cannot be empty"
-            } else {
-                binding.textInputPassword.error = null
-            }
-
-            if (isValid) {
-
-            }
-
+            email = binding.editTextEmail.text.toString()
+            password = binding.editTextPassword.text.toString()
+            if (isFormValidated())
+                signInWithEmailAndPassword(email, password)
         }
 
         binding.buttonSignWithGoogle.setOnClickListener {
             signInWithGoogle()
+        }
+
+        binding.buttonNavigateToSignUp.setOnClickListener {
+            it?.findNavController()?.navigate(R.id.action_loginFragment_to_signUpFragment)
         }
 
         binding.editTextEmail.setOnKeyListener { _, _, _ ->
@@ -111,25 +101,50 @@ class LoginFragment : Fragment() {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
                 val account = task.getResult(ApiException::class.java)!!
-                Timber.d(account.id)
                 firebaseAuthWithGoogle(account.idToken!!)
             } catch (e: ApiException) {
-                binding.lottieAnimation.visibility = View.GONE
-                binding.lottieAnimation.cancelAnimation()
+                cancelAnimation(binding.lottieAnimation)
                 Timber.w("Login Failed")
             }
         }
     }
 
-    private fun signInWithEmailAndPassword(email: String, password: String) {
-
-    }
-
     private fun signInWithGoogle() {
-        binding.lottieAnimation.visibility = View.VISIBLE
-        binding.lottieAnimation.playAnimation()
+        playAnimation(binding.lottieAnimation)
         val signInIntent = googleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun signInWithEmailAndPassword(email: String, password: String) {
+        playAnimation(binding.lottieAnimation)
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                if (it.isSuccessful) {
+                    cancelAnimation(binding.lottieAnimation)
+                    startActivity(Intent(requireActivity(), MovieActivity::class.java))
+                    requireActivity().finish()
+                }
+            }.addOnFailureListener {
+                cancelAnimation(binding.lottieAnimation)
+                showSnack(binding.lottieAnimation, "Login failed. Try again")
+                Timber.e("Login Failed: ${it.message}")
+            }
+    }
+
+    private fun isFormValidated(): Boolean {
+        var isValid = true
+
+        if (!isEmailValid(binding.editTextEmail.text)) {
+            isValid = false
+            binding.textInputEmail.error = getString(R.string.field_cannot_be_empty)
+        }
+
+        if (!isPasswordValid(binding.editTextPassword.text)) {
+            isValid = false
+            binding.textInputPassword.error = getString(R.string.field_cannot_be_empty)
+        }
+
+        return isValid
     }
 
     private fun isEmailValid(email: Editable?): Boolean {
@@ -142,8 +157,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun firebaseAuthWithGoogle(idToken: String) {
-        binding.lottieAnimation.visibility = View.VISIBLE
-        binding.lottieAnimation.playAnimation()
+        playAnimation(binding.lottieAnimation)
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
             .addOnCompleteListener(this.requireActivity()) { task ->
@@ -153,29 +167,20 @@ class LoginFragment : Fragment() {
                     val user = User(
                         firebaseUser.displayName,
                         firebaseUser.email,
-                        firebaseUser.photoUrl
+                        firebaseUser.photoUrl,
+                        null
                     )
 
-                    binding.lottieAnimation.visibility = View.GONE
-                    binding.lottieAnimation.cancelAnimation()
+                    cancelAnimation(binding.lottieAnimation)
                     PrefManager.getInstance(context).saveUserInfo(user)
                     startActivity(Intent(requireActivity(), MovieActivity::class.java))
                     requireActivity().finish()
-                } else {
-                    binding.lottieAnimation.visibility = View.GONE
-                    binding.lottieAnimation.cancelAnimation()
-                    Timber.w("Authentication Failed ${task.exception}")
                 }
+            }.addOnFailureListener {
+                Timber.w("Authentication Failed ${it.message}")
+                cancelAnimation(binding.lottieAnimation)
+                showSnack(binding.lottieAnimation, "Sign in failed. Try again.")
             }
-    }
-
-    private fun showAndHideAnimation(lottieAnimationView: LottieAnimationView, view: View) {
-
-    }
-
-
-    companion object {
-        const val RC_SIGN_IN = 123
     }
 
 }

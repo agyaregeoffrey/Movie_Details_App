@@ -8,30 +8,29 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.dev.gka.abda.DateUtil
+import com.dev.gka.abda.utilities.DateUtil
 import com.dev.gka.abda.R
-import com.dev.gka.abda.model.Result
-import com.dev.gka.abda.model.TvResult
+import com.dev.gka.abda.model.MovieResult
 
+const val BASE_MOVIE_POSTER_URL ="http://image.tmdb.org/t/p/w500"
 
 class MovieViewHolder private constructor (itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val movieCover: ImageView = itemView.findViewById(R.id.movie_cover)
     private val title: TextView = itemView.findViewById(R.id.movie_title)
     private val releaseDate: TextView = itemView.findViewById(R.id.release_date)
 
-    // http://image.tmdb.org/t/p/w500
 
-    fun bind(movie: Result) {
+    fun bind(movie: MovieResult) {
         Glide.with(itemView)
-            .load("http://image.tmdb.org/t/p/w500${movie.poster_path}")
+            .load(BASE_MOVIE_POSTER_URL + movie.poster_path)
             .apply(
                 RequestOptions()
-                    .placeholder(R.drawable.ic_loading_banner)
+                    .placeholder(R.drawable.ic_loading)
             )
             .centerCrop()
             .into(movieCover)
         title.text = movie.title
-        releaseDate.text = DateUtil.formatDateString(movie.release_date)
+        releaseDate.text = movie.release_date?.let { DateUtil.formatDateString(it) }
     }
 
     companion object {

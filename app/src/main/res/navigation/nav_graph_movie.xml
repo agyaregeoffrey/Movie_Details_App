@@ -20,4 +20,18 @@
         android:name="com.dev.gka.abda.screens.series.SeriesFragment"
         android:label="@string/series"
         tools:layout="@layout/fragment_series"/>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.dev.gka.abda.screens.signup.SignUpFragment"
+        android:label="SignUpFragment"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_home_fragment"
+            app:destination="@id/home_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.dev.gka.abda.screens.login.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login"/>
 </navigation>

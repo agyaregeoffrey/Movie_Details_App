@@ -7,12 +7,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.dev.gka.abda.NavigationHost
+import com.dev.gka.abda.utilities.NavigationHost
 import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.ActivityMovieBinding
-import com.dev.gka.abda.model.Result
-import com.dev.gka.abda.screens.profile.ProfileFragment
-import com.dev.gka.abda.screens.series.SeriesFragment
 
 class MovieActivity : AppCompatActivity(), NavigationHost {
 

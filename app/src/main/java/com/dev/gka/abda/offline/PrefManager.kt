@@ -11,7 +11,7 @@ class PrefManager private constructor() {
         editor!!.putString("name", user.name)
         editor!!.putString("imageUrl", user.imageLink.toString())
         editor!!.putString("email", user.email)
-
+        editor!!.putString("phone", user.phone)
         editor!!.commit()
     }
 
@@ -23,12 +23,16 @@ class PrefManager private constructor() {
         return sharedPreferences!!.getString("imageUrl", "")
     }
 
-    fun getUserEmail(): String? {
+    fun getEmail(): String? {
         return sharedPreferences!!.getString("email", "")
     }
 
+    fun getUserPhone(): String? {
+        return sharedPreferences!!.getString("phone", "No Record Found")
+    }
+
     companion object {
-        private val sharedPref = PrefManager()
+        private val prefManager = PrefManager()
         private var sharedPreferences: SharedPreferences? = null
         private var editor: SharedPreferences.Editor? = null
 
@@ -41,7 +45,7 @@ class PrefManager private constructor() {
                 )
                 editor = sharedPreferences!!.edit()
             }
-            return sharedPref
+            return prefManager
         }
     }
 }

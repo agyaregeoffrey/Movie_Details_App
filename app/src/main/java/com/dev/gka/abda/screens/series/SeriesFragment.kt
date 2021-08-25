@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dev.gka.abda.ApiStatus
-import com.dev.gka.abda.MovieAdapter
-import com.dev.gka.abda.NavigationHost
-import com.dev.gka.abda.R
+import com.dev.gka.abda.utilities.ApiStatus
+import com.dev.gka.abda.utilities.NavigationHost
 import com.dev.gka.abda.adapters.TvAdapter
-import com.dev.gka.abda.adapters.TvViewHolder
 import com.dev.gka.abda.databinding.FragmentSeriesBinding
 import com.dev.gka.abda.screens.details.DetailsFragment
 

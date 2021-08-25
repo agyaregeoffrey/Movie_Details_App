@@ -1,4 +1,4 @@
-package com.dev.gka.abda.screens
+package com.dev.gka.abda.screens.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.fragment.findNavController
 import com.dev.gka.abda.R
 import com.dev.gka.abda.activities.MovieActivity
@@ -45,13 +44,23 @@ class SplashFragment : Fragment() {
 
         handler = Handler(Looper.getMainLooper())
         handler.postDelayed({
-            val currentUser = auth.currentUser
-
-            if (null == currentUser) {
-                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
-            } else {
-                startActivity(Intent(this.requireActivity(), MovieActivity::class.java))
-                requireActivity().finish()
+//            val user = auth.currentUser
+//
+//            if (null == currentUser) {
+//                findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+//            } else {
+//                startActivity(Intent(this.requireActivity(), MovieActivity::class.java))
+//                requireActivity().finish()
+//            }
+            // Check if a user is already logged in
+            when (auth.currentUser) {
+                null -> {
+                    findNavController().navigate(R.id.action_splashFragment_to_welcomeFragment)
+                }
+                else -> {
+                    startActivity(Intent(this.requireActivity(), MovieActivity::class.java))
+                    requireActivity().finish()
+                }
             }
         }, 2000)
         return binding.root

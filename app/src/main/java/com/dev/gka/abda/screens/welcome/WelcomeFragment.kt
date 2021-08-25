@@ -1,4 +1,4 @@
-package com.dev.gka.abda.screens
+package com.dev.gka.abda.screens.welcome
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

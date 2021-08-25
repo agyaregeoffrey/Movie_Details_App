@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.dev.gka.abda.DateUtil
+import com.dev.gka.abda.utilities.DateUtil
 import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.FragmentDetailsBinding
 

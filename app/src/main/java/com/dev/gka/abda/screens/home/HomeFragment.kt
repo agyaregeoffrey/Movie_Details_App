@@ -11,13 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.dev.gka.abda.ApiStatus
-import com.dev.gka.abda.MovieAdapter
-import com.dev.gka.abda.NavigationHost
+import com.dev.gka.abda.adapters.MovieAdapter
+import com.dev.gka.abda.utilities.NavigationHost
 import com.dev.gka.abda.R
 import com.dev.gka.abda.databinding.FragmentHomeBinding
-import com.dev.gka.abda.model.Result
+import com.dev.gka.abda.model.MovieResult
 import com.dev.gka.abda.screens.details.DetailsFragment
+import com.dev.gka.abda.utilities.ApiStatus
 
 
 /**
@@ -40,18 +40,17 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater, container, false)
         binding.lifecycleOwner = this
-
-        statusOfApi()
         initHomeFragmentDisplayContent()
 
         return binding.root
     }
 
     private fun initHomeFragmentDisplayContent() {
+        apiStatus()
         viewModel.trending.observe(viewLifecycleOwner, Observer { data ->
             binding.recyclerTrending.apply {
                 adapter = MovieAdapter(MovieAdapter.OnClickListener { result ->
-                    viewModel.displayMovieDetails(result)
+                    viewModel.navigateToSelectedMovieDetails(result)
                 }, data)
                 layoutManager = LinearLayoutManager(
                     context,
@@ -63,7 +62,7 @@ class HomeFragment : Fragment() {
         viewModel.popular.observe(viewLifecycleOwner, Observer { data ->
             binding.recyclerPopular.apply {
                 adapter = MovieAdapter(MovieAdapter.OnClickListener { result ->
-                    viewModel.displayMovieDetails(result)
+                    viewModel.navigateToSelectedMovieDetails(result)
                 }, data)
                 layoutManager = LinearLayoutManager(
                     context,
@@ -75,7 +74,7 @@ class HomeFragment : Fragment() {
         viewModel.top.observe(viewLifecycleOwner, { data ->
             binding.recyclerTopRated.apply {
                 adapter = MovieAdapter(MovieAdapter.OnClickListener { result ->
-                    viewModel.displayMovieDetails(result)
+                    viewModel.navigateToSelectedMovieDetails(result)
                 }, data)
                 layoutManager = LinearLayoutManager(
                     context,
@@ -97,7 +96,7 @@ class HomeFragment : Fragment() {
 
                 )
                 (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
-                viewModel.displayMovieDetailsComplete()
+                viewModel.navigateToSelectedMovieDetailsComplete()
             }
         })
 
@@ -107,9 +106,9 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun statusOfApi() {
-        viewModel.status.observe(viewLifecycleOwner, {
-            when (it) {
+    private fun apiStatus() {
+        viewModel.status.observe(viewLifecycleOwner, { status ->
+            when (status) {
                 ApiStatus.LOADING -> {
                     binding.groupWidgets.visibility = View.GONE
                     binding.groupStatus.visibility = View.VISIBLE
@@ -133,31 +132,31 @@ class HomeFragment : Fragment() {
         })
     }
 
-    private fun navigateToSelectedMovieOnBanner(result: Result) {
+    private fun navigateToSelectedMovieOnBanner(movieResult: MovieResult) {
         val bundle = bundleOf(
-            "title" to result.original_title,
-            "release" to result.release_date,
-            "overview" to result.overview,
-            "vote" to result.vote_count,
-            "language" to result.original_language,
-            "backdrop" to result.backdrop_path,
-            "poster" to result.poster_path
+            "title" to movieResult.original_title,
+            "release" to movieResult.release_date,
+            "overview" to movieResult.overview,
+            "vote" to movieResult.vote_count,
+            "language" to movieResult.original_language,
+            "backdrop" to movieResult.backdrop_path,
+            "poster" to movieResult.poster_path
 
         )
         (activity as NavigationHost).navigateTo(DetailsFragment(), bundle, false)
-        viewModel.displayMovieDetailsComplete()
+        viewModel.navigateToSelectedMovieDetailsComplete()
 
     }
 
-    private fun movieOnBanner(result: Result) {
+    private fun movieOnBanner(movieResult: MovieResult) {
         Glide.with(this)
-            .load("http://image.tmdb.org/t/p/w500${result.poster_path}")
+            .load("http://image.tmdb.org/t/p/w500${movieResult.poster_path}")
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.ic_loading_banner)
             )
             .centerCrop()
             .into(binding.imageSinglePopular)
-        binding.textSinglePopular.text = result.title
+        binding.textSinglePopular.text = movieResult.title
     }
 }

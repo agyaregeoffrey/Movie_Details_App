@@ -24,7 +24,7 @@
         <item name="backgroundTint">@color/black</item>
         <item name="cornerRadius">16dp</item>
         <item name="android:fontFamily">@font/poppins</item>
-        <item name="android:padding">20dp</item>
+        <item name="android:padding">@dimen/dimen_20</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:textSize">12sp</item>
         <item name="android:textStyle">bold</item>
@@ -92,6 +92,10 @@
         <item name="android:textSize">10sp</item>
     </style>
 
+    <style name="MoreTextStyle" parent="MovieGenreTextStyle">
+        <item name="android:textSize">15sp</item>
+    </style>
+
     <style name="SignInSignUpHeaderTwo.Link" parent="SignInSignUpHeaderTwo">
         <item name="android:textColor">@color/purple_500</item>
     </style>
@@ -127,6 +131,15 @@
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">50dp</item>
+    </style>
+
+    <style name="TextButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">@color/color_red</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="strokeColor">@color/hint_color</item>
+        <item name="android:stateListAnimator" tools:ignore="NewApi">@null</item>
+        <item name="android:padding">@dimen/dimen_20</item>
     </style>
 
 </resources>

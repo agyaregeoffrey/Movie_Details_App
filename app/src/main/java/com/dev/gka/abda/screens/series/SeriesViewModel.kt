@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dev.gka.abda.ApiStatus
-import com.dev.gka.abda.Constants
+import com.dev.gka.abda.utilities.ApiStatus
+import com.dev.gka.abda.utilities.Constants
 import com.dev.gka.abda.model.TV
 import com.dev.gka.abda.model.TvResult
 import com.dev.gka.abda.network.MyApi

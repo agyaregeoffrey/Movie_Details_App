@@ -41,5 +41,10 @@
     <string name="popular">Popular</string>
     <string name="top_rated">Top Rated</string>
     <string name="loading">Loading...</string>
-    <string name="watched">watched</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="more">more</string>
+    <string name="phone">0560243988</string>
+    <string name="field_cannot_be_empty">Field cannot be empty</string>
+    <string name="invalid_email">Invalid email entered</string>
+    <string name="password_limit_less">Password cannot be less than 8 characters</string>
 </resources>

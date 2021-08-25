@@ -1,8 +1,7 @@
-package com.dev.gka.abda
+package com.dev.gka.abda.utilities
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import com.dev.gka.abda.model.Result
 
 
 /**

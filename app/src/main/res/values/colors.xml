@@ -14,8 +14,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="logo_icon_color">@color/white</color>
-    <color name="backdrop_color">#77302F2F</color>
+    <color name="backdrop_color">#FFFFFFFF</color>
 
     <color name="gray">#FF2C2C2C</color>
     <color name="hint_color">#5E5C5C</color>
+    <color name="color_red">#FF0000</color>
 </resources>

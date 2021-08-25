@@ -215,40 +215,37 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="materialCardView,text_trending,recycler_trending,textView8,
-                recycler_popular,textView9,recycler_top_rated, imageView, imageView4, imageView5" />
+                recycler_popular,textView9,recycler_top_rated, more_trending, more_popular, more_top_rated" />
 
-            <ImageView
-                android:id="@+id/imageView"
+            <TextView
+                android:id="@+id/more_trending"
+                style="@style/MoreTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="235dp"
+                android:text="@string/more"
                 app:layout_constraintBottom_toBottomOf="@+id/text_trending"
                 app:layout_constraintEnd_toEndOf="@+id/materialCardView"
-                app:layout_constraintStart_toEndOf="@+id/text_trending"
-                app:layout_constraintTop_toTopOf="@+id/text_trending"
-                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+                app:layout_constraintTop_toTopOf="@+id/text_trending" />
 
-            <ImageView
-                android:id="@+id/imageView4"
+            <TextView
+                android:id="@+id/more_popular"
+                style="@style/MoreTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="301dp"
+                android:text="@string/more"
                 app:layout_constraintBottom_toBottomOf="@+id/textView8"
-                app:layout_constraintEnd_toEndOf="@+id/imageView"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="@+id/textView8"
-                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+                app:layout_constraintEnd_toEndOf="@+id/more_trending"
+                app:layout_constraintTop_toTopOf="@+id/textView8" />
 
-            <ImageView
-                android:id="@+id/imageView5"
+            <TextView
+                android:id="@+id/more_top_rated"
+                style="@style/MoreTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="282dp"
+                android:text="@string/more"
                 app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                app:layout_constraintEnd_toEndOf="@+id/imageView4"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/textView9"
-                app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
+                app:layout_constraintEnd_toEndOf="@+id/more_popular"
+                app:layout_constraintTop_toTopOf="@+id/textView9" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,13 +1,17 @@
 package com.dev.gka.abda.screens.profile
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import com.dev.gka.abda.activities.MainActivity
 import com.dev.gka.abda.databinding.FragmentProfileBinding
 import com.dev.gka.abda.offline.PrefManager
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
 import java.util.*
 
@@ -23,7 +27,7 @@ class ProfileFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false)
 
-        binding.signOutLayout.setOnClickListener {
+        binding.buttonSignOut.setOnClickListener {
             signOut()
         }
         initializeProfileDetails()
@@ -31,18 +35,16 @@ class ProfileFragment : Fragment() {
     }
 
     private fun signOut() {
-        Snackbar.make(
-            requireView(), "Layout Clicked",
-            Snackbar.LENGTH_LONG
-        )
-            .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
-            .show()
+        FirebaseAuth.getInstance().signOut()
+        startActivity(Intent(requireActivity(), MainActivity::class.java))
+        requireActivity().finish()
     }
 
     private fun initializeProfileDetails() {
         val pref = PrefManager.getInstance(context)
         binding.textDisplayName.text = pref.getDisplayName()
-        binding.textEmail.text = pref.getUserEmail()
+        binding.textEmail.text = pref.getEmail()
+        binding.textPhone.text = pref.getUserPhone()
 
         val initials = StringBuilder()
 
@@ -54,8 +56,6 @@ class ProfileFragment : Fragment() {
                 initials.append(name[0].toUpperCase())
             }
         }
-
-        Timber.d("$initials")
 
         binding.imageProfile.visibility = View.GONE
 

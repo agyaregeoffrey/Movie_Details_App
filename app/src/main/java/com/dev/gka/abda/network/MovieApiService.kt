@@ -35,10 +35,12 @@ private val retrofit = Retrofit.Builder()
 
 
 interface MovieApiService {
+    
     @GET("movie/{popular}")
     suspend fun getPopularMovies(
         @Path("popular") popular: String,
-        @Query("api_key") apiKey: String
+        @Query("api_key") apiKey: String,
+        @Query("page") page: Int,
     ): Movie
 
     @GET("movie/{top_rated}")
@@ -54,7 +56,7 @@ interface MovieApiService {
         @Query("api_key") apiKey: String
     ): Movie
 
-    // Series endpoints
+    // TV endpoints
     @GET("tv/{airing_today}")
     suspend fun airingTodaySeries(
         @Path("airing_today") airingToday: String,
