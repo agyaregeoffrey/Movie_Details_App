@@ -7,13 +7,15 @@
         <entry key="app/src/main/res/drawable/ic_outline_favorite_border_24.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/drawable/welcome_backdrop_shape.xml" value="0.19895833333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_movie.xml" value="0.11458333333333333" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.5" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="1.0" />
         <entry key="app/src/main/res/layout/fragment_series.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_welcome.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_movie_cover.xml" value="0.5350609756097561" />
+        <entry key="app/src/main/res/layout/movie_app_bar_layout.xml" value="0.1490036231884058" />
       </map>
     </option>
   </component>
