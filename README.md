@@ -1,4 +1,4 @@
-# Movie_Details_App
+# Aktiv Movies
 App that consumes The Movie Database (tmdb) Api to display movie details to its users.
 
 ## Getting Started
