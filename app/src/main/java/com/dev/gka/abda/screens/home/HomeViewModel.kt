@@ -44,12 +44,12 @@ class HomeViewModel : ViewModel() {
         get() = _navigateToSelectedMovie
 
     init {
-        retrievePopularMovies()
-        retrieveTopRatedMovies()
-        retrieveTrendingMovies()
+        popularMovies()
+        topRatedMovies()
+        trendingMovies()
     }
 
-    private fun retrievePopularMovies() {
+    private fun popularMovies() {
         var popularMovies: MutableList<Movie>
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
@@ -75,7 +75,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    private fun retrieveTopRatedMovies() {
+    private fun topRatedMovies() {
         var topMovies: MutableList<Movie>
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
@@ -100,7 +100,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    private fun retrieveTrendingMovies() {
+    private fun trendingMovies() {
         var trendingMovies: MutableList<Movie>
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING

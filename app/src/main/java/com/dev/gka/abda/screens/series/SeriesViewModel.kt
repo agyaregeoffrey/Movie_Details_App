@@ -32,13 +32,13 @@ class SeriesViewModel : ViewModel() {
         get() = _navigateToSelectedSeries
 
     init {
-        retrieveAiringToday()
-        retrievePopularSeries()
-        retrieveTopRated()
+        airingToday()
+        popularSeries()
+        topRated()
     }
 
 
-    private fun retrieveAiringToday() {
+    private fun airingToday() {
         var airing: MutableList<TV>
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
@@ -47,7 +47,7 @@ class SeriesViewModel : ViewModel() {
                     MyApi.retrofitService.airingTodaySeries(
                         Constants.AIRING_TODAY,
                         Constants.API_KEY,
-                        10
+                        1
                     )
                 )
                 for (air in airing) {
@@ -63,7 +63,7 @@ class SeriesViewModel : ViewModel() {
         }
     }
 
-    private fun retrievePopularSeries() {
+    private fun popularSeries() {
         var popularSeries: MutableList<TV>
         viewModelScope.launch {
             try {
@@ -86,7 +86,7 @@ class SeriesViewModel : ViewModel() {
         }
     }
 
-    private fun retrieveTopRated() {
+    private fun topRated() {
         var topRated: MutableList<TV>
         viewModelScope.launch {
             try {
